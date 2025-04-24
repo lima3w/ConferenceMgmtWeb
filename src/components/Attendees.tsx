@@ -1,12 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 
-const fetchAttendees = async () => {
-    const url_base = import.meta.env.VITE_CM_API_URL;
-    const url_full = `${url_base}/registrations`;
-    const res = await fetch(url_full);
-    if (!res.ok) throw new Error("Network response was not ok");
-    return res.json();
-};
+// @ts-ignore
+import fetchCollection from "../lib/database";
+
+const fetchAttendees = () => fetchCollection("registrations");
 
 export default function Attendees() {
     const { data, error, isLoading } = useQuery({
